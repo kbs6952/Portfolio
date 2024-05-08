@@ -16,9 +16,7 @@ public class First : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
+        
     }
 
     // Update is called once per frame
@@ -33,10 +31,11 @@ public class First : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
        
-        rotationX -= mouseY;                                                 // 좌우이동
-              
-        
-        rotationY += mouseX;                                                // 상하이동
+        rotationX -= mouseY;                                                 // 상하이동
+        rotationX = Mathf.Clamp(rotationX, -limitAngle, limitAngle);
+
+
+        rotationY += mouseX;                                                // 좌우이동
 
         playerHead.rotation = Quaternion.Euler(rotationX, rotationY,0 );
 
