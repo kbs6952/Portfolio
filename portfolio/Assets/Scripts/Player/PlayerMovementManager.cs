@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementManager : MonoBehaviour
 {
-    PlayerMovement playerMovement;
+    PlayerManager playerManager;
+
+    [Header("플레이어 매니저 스크립트")]
+    [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
+
+    PlayerMovementManager playerMovement;
 
     [Header("플레이어 움직임 제어 변수")]
     [SerializeField] private float runSpeed;
@@ -32,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movement;
     private void Awake()
     {
+        playerManager = GetComponent<PlayerManager>();
         playerAnimator = GetComponent<Animator>();
         player = GetComponent<CharacterController>();
     }
@@ -45,10 +51,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();
+        HandleMovement();
+        HandleActionInput();
     }
-    private void PlayerMove()
+    private void HandleMovement()
     {
+        if (playerManager.isPerformingAction) return;           // 플레이어가 액션중일땐 움직일 수 없음.
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -62,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             activeMoveSpeed = runSpeed;
+            moveAmount++;
             playerAnimator.SetBool("isRun", true);
         }
         else
@@ -83,11 +93,11 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded) 
         {
             movement.y = 0;
-            Debug.Log("현재 플레이어가 땅에 있는 상태입니다.");
         } 
         // 점프 구현
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            playerAnimator.CrossFade("Jump", 0.2f);
             movement.y = jumpPower;
         }
 
@@ -103,12 +113,27 @@ public class PlayerMovement : MonoBehaviour
     private void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(groundCheckPoint.position, groundCheckRadius, groundLayer);
+        playerAnimator.SetBool("isGround", isGrounded);
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
     }
+
+    private void HandleActionInput()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            HandleAttackAction();
+        }
+    }
+
+    private void HandleAttackAction()
+    {
+        playerManager.playerAnimatorManager.PlayerTargetActionAnimation("ATK0", true);
+    }
+
 }
 
     

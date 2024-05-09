@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2988,7 +2988,7 @@ Animator:
   m_GameObject: {fileID: 1898833038796147795}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a58154c350c4ccf47a6cdad03a8dca1a, type: 3}
-  m_Controller: {fileID: 9100000, guid: fe7dc3af75802144ca9383c3224ba587, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7a9c5e7c38ff55a40af2bece16f69313, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3376,6 +3376,8 @@ GameObject:
   - component: {fileID: 7080357696134891290}
   - component: {fileID: 372682898059896736}
   - component: {fileID: 481495112454688773}
+  - component: {fileID: 7532692101685600647}
+  - component: {fileID: 7532692101685600646}
   - component: {fileID: 7532692101685600645}
   m_Layer: 0
   m_Name: Player
@@ -4653,6 +4655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5105e8a419ae51c4089daa8c45004886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimatorManager: {fileID: 0}
   runSpeed: 10
   playerMoveSpeed: 5
   player: {fileID: 481495112454688773}
@@ -4665,6 +4668,39 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &7532692101685600646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898833038796147795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf15b0b3a81d6e6469c8a00816c0556f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7532692101685600647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898833038796147795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99e0e13ef9fbb54aaf3e74c6f46316a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+  animator: {fileID: 0}
+  isPerformingAction: 0
+  applyRootMotion: 0
+  canRotate: 1
+  canMove: 1
+  canCombo: 0
+  playerAnimatorManager: {fileID: 0}
+  playerMovementManager: {fileID: 0}
 --- !u!4 &7574532579010394326
 Transform:
   m_ObjectHideFlags: 0
