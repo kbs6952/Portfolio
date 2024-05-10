@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -52,6 +53,7 @@ public class PlayerMovementManager : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HandleComboAttack();
         HandleActionInput();
     }
     private void HandleMovement()
@@ -132,6 +134,23 @@ public class PlayerMovementManager : MonoBehaviour
     private void HandleAttackAction()
     {
         playerManager.playerAnimatorManager.PlayerTargetActionAnimation("ATK0", true);
+        playerManager.canCombo = true;
+    }
+    private void HandleComboAttack()
+    {
+        if (!playerManager.canCombo) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerAnimator.SetTrigger("doAttack");
+        }
+    }
+    private void SheildParrying()       // 방패 패링 구현(아직x)
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+           // playerAnimator.CrossFade("Parry",0.2f); 이런식으로 구현?
+        }
     }
 
 }
