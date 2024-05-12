@@ -5,12 +5,7 @@ using UnityEngine.UI;
 
 public class GamePlayUIManager : MonoBehaviour
 {
-    public Image testImage;
-    
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject parentObjSetting;
+    private GameObject SettingPrefab;
 
-    
 }
